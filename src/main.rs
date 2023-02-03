@@ -8,10 +8,10 @@ fn main() {
     let numbers = get_numbers("./numbers.txt").expect("Ocurred an error");
 
     if numbers.len() <= max_init {
-        println!("The numbers are smaller than: {}", max_init);
+        println!("The mines are smaller than: {}", max_init);
         return;
     }
-    println!("Length of numbers: {}", numbers.len());
+    println!("Length of mines: {}", numbers.len());
     let mut first_numbers: Vec<u128> = numbers[0..max_init].iter().map(|n| n.to_owned()).collect();
     let rest_numbers: Vec<u128> = numbers[max_init..].iter().map(|n| n.to_owned()).collect();
 
@@ -23,16 +23,16 @@ fn main() {
 
     // Run the app finding a insecure mine
     let (node_count, result) = app_list.run();
-    println!("Read nodes {node_count}");
+    println!("Read mines {node_count} + {max_init} (safe mines)");
     match result {
         ResultAppList::Insecure(n) => {
-            println!("Number: {} is insecure", n);
+            println!("Mine: {} is insecure", n);
         }
         ResultAppList::Secure => {
-            println!("The list of numbers are safe");
+            println!("The list of mines are safe");
         }
         ResultAppList::EmptyList => {
-            println!("The list of numbers are empty");
+            println!("The list of mines are empty");
         }
         ResultAppList::Missing => {
             println!("Missing fields in list");
